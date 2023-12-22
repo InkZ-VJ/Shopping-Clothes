@@ -8,7 +8,7 @@ import {
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firbase.utils";
 
-import './sign-up-form.styles.scss'
+import "./sign-up-form.styles.scss";
 
 const defaultFormFields = {
   displayName: "",
@@ -96,7 +96,7 @@ const SignUpForm = () => {
           value={confirmPassword}
         />
 
-        <Button type='submit'>Sign Up</Button>
+        <Button type="submit">Sign Up</Button>
       </form>
     </div>
   );

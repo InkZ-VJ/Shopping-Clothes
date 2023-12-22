@@ -6,10 +6,10 @@ import Button from "../button/button.component";
 import {
   signInWithGooglePopup,
   createUserDocumentFromAuth,
-  signInAuthUserWithEmailAndPassword
+  signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firbase.utils";
 
-import './sign-in-form.styles.scss'
+import "./sign-in-form.styles.scss";
 
 const defaultFormFields = {
   email: "",
@@ -18,29 +18,30 @@ const defaultFormFields = {
 
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const {email, password} = formFields;
+  const { email, password } = formFields;
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
 
   const signWithGoogle = async () => {
-    const {user} = await signInWithGooglePopup();
-    await createUserDocumentFromAuth(user);
+    await signInWithGooglePopup();
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const response = await signInAuthUserWithEmailAndPassword(email,password);
-      console.log(response);
+      const { user } = await signInAuthUserWithEmailAndPassword(
+        email,
+        password
+      );
       resetFormFields();
     } catch (error) {
       console.log(error);
 
-      if(error.code === 'auth/invalid-credential'){
-        alert('incorrect Email or Password');
+      if (error.code === "auth/invalid-credential") {
+        alert("incorrect Email or Password");
       }
     }
   };
@@ -55,7 +56,6 @@ const SignInForm = () => {
       <h2>Already have an account?</h2>
       <span>Sign in with your email and password</span>
       <form onSubmit={handleSubmit}>
-        
         <FormInput
           label="Email"
           type="email"
@@ -74,12 +74,12 @@ const SignInForm = () => {
           value={password}
         />
         <div className="buttons-container">
-        <Button type='submit'>Sign In</Button>
-        <Button type='button' buttonType='google' onClick={signWithGoogle}>Google sign in</Button>
+          <Button type="submit">Sign In</Button>
+          <Button type="button" buttonType="google" onClick={signWithGoogle}>
+            Google sign in
+          </Button>
         </div>
-        
       </form>
-          
     </div>
   );
 };
