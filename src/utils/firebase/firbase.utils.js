@@ -1,5 +1,4 @@
 import { initializeApp } from 'firebase/app';
-
 import {
     getAuth,
     signInWithRedirect,
@@ -10,6 +9,7 @@ import {
     signOut,
     onAuthStateChanged,
 } from 'firebase/auth';
+
 import {
     getFirestore,
     doc,
@@ -19,16 +19,18 @@ import {
     writeBatch,
     query,
     getDocs
-} from 'firebase/firestore'
+} from 'firebase/firestore';
+
+import { FIREBASE_KEY } from './firebase.key';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCwmZpUsCo6RyJ_AUgky-W5OwHq7SZyjpc",
-    authDomain: "crwn-clothing-db-f90b2.firebaseapp.com",
-    projectId: "crwn-clothing-db-f90b2",
-    storageBucket: "crwn-clothing-db-f90b2.appspot.com",
-    messagingSenderId: "1076998042964",
-    appId: "1:1076998042964:web:14b5e55875b2ac562e04c1"
-};
+    apiKey: FIREBASE_KEY.apiKey,
+    authDomain: FIREBASE_KEY.authDomain,
+    projectId: FIREBASE_KEY.projectId,
+    storageBucket: FIREBASE_KEY.storageBucket,
+    messagingSenderId: FIREBASE_KEY.messagingSenderId,
+    appId: FIREBASE_KEY.appId,
+}
 
 const firebaseApp = initializeApp(firebaseConfig);
 
@@ -64,13 +66,8 @@ export const getCategoriesAndDocuMents = async () => {
     const q = query(collectionRef);
 
     const querySanpShot = await getDocs(q);
-    const categoryMap = querySanpShot.docs.reduce((acc, docSnapShot) => {
-        const { title, items } = docSnapShot.data();
-        acc[title.toLowerCase()] = items;
-        return acc;
-    }, {});
+    return querySanpShot.docs.map(docSnapshot => docSnapshot.data());
 
-    return categoryMap;
 }
 
 export const createUserDocumentFromAuth = async (

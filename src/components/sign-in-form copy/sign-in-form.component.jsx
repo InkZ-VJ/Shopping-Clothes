@@ -9,7 +9,7 @@ import {
   signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firbase.utils";
 
-import {SignUpContainer}from"./sign-in-form.styles";
+import {SignUpContainer,ButtonsContainer}from"./sign-in-form.styles";
 
 const defaultFormFields = {
   email: "",
@@ -73,12 +73,12 @@ const SignInForm = () => {
           name="password"
           value={password}
         />
-        <div className="buttons-container">
+        <ButtonsContainer>
           <Button type="submit">Sign In</Button>
           <Button type="button" buttonType={BUTTON_TYPE_CLASSES.google} onClick={signWithGoogle}>
             Google sign in
           </Button>
-        </div>
+        </ButtonsContainer>
       </form>
     </SignUpContainer>
   );
