@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import FormInput from "../form-input/form-input.component";
-import Button,{BUTTON_TYPE_CLASSES} from "../button/button.component";
+import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 
 import {
   signInWithGooglePopup,
@@ -9,7 +9,13 @@ import {
   signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firbase.utils";
 
-import {SignUpContainer,ButtonsContainer}from"./sign-in-form.styles";
+import {
+  googleSignInStart,
+  emailSignInStart,
+} from "../../store/user/user.action";
+
+import { SignUpContainer, ButtonsContainer } from "./sign-in-form.styles";
+import { useDispatch } from "react-redux";
 
 const defaultFormFields = {
   email: "",
@@ -17,6 +23,7 @@ const defaultFormFields = {
 };
 
 const SignInForm = () => {
+  const dispatch = useDispatch();
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
@@ -24,18 +31,19 @@ const SignInForm = () => {
     setFormFields(defaultFormFields);
   };
 
-  const signWithGoogle = async () => {
-    await signInWithGooglePopup();
+  //! Old signIn with Google
+  // const signWithGoogle = async () => {
+  //   await signInWithGooglePopup();
+  // };
+  const signInWithGoogle = async () => {
+    dispatch(googleSignInStart());
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const { user } = await signInAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
+      dispatch(emailSignInStart(email, password));
       resetFormFields();
     } catch (error) {
       console.log(error);
@@ -75,7 +83,11 @@ const SignInForm = () => {
         />
         <ButtonsContainer>
           <Button type="submit">Sign In</Button>
-          <Button type="button" buttonType={BUTTON_TYPE_CLASSES.google} onClick={signWithGoogle}>
+          <Button
+            type="button"
+            buttonType={BUTTON_TYPE_CLASSES.google}
+            onClick={signInWithGoogle}
+          >
             Google sign in
           </Button>
         </ButtonsContainer>
