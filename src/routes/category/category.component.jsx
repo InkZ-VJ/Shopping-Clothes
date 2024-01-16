@@ -7,13 +7,13 @@ import { CategoryContainer, Title } from "./category.styles.jsx";
 import { useSelector } from "react-redux";
 import {
   selectCategoriesMap,
-  selectIsLoading,
-} from "../../store/categories/categories.selector.js";
+  selectCategoriesIsLoading,
+} from "../../store/categories/categories.selector";
 
 const Category = () => {
   const { category } = useParams();
   const categoriesMap = useSelector(selectCategoriesMap);
-  const isLoading = useSelector(selectIsLoading);
+  const isLoading = useSelector(selectCategoriesIsLoading);
   const [products, setProducts] = useState(categoriesMap[category]);
 
   useEffect(() => {
