@@ -7,7 +7,7 @@ import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component
 import { ReactComponent as CrwLogo } from "../../assets/crown.svg";
 
 
-import { signOutUser } from "../../utils/firebase/firbase.utils";
+// import { signOutUser } from "../../utils/firebase/firebase.utils";
 
 import {
   NavigationContainer,

@@ -8,23 +8,15 @@ import Home from "./routes/home/home.component";
 import Authentication from "./routes/sign-in/authentication.component";
 import Shop from "./routes/shop/shop.component";
 import CheckOut from "./routes/checkout/checkout.component";
-import { onAuthStateChangedListener, createUserDocumentFromAuth } from "./utils/firebase/firbase.utils";
-import { setCurrentUser } from "./store/user/user.action";
+import { onAuthStateChangedListener, createUserDocumentFromAuth } from "./utils/firebase/firebase.utils";
+import { checkUserSession  } from "./store/user/user.action";
 
 const App = () => {
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const unsubcribe = onAuthStateChangedListener((user) => {
-      console.log(user);
-      if (user) {
-        createUserDocumentFromAuth(user);
-      }
-      dispatch(setCurrentUser(user));
-    });
-
-    return unsubcribe;
+    dispatch(checkUserSession());
   }, []);
 
   return (
