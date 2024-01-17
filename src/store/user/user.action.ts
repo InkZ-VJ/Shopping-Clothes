@@ -17,6 +17,7 @@ type UserData = {
   createdAt: Date;
   displayName: string;
   email: string;
+  id: string;
 };
 // import {
 //   UserData,
@@ -44,7 +45,7 @@ export type SignInFailed = ActionWithPayload<
 
 export type SignUpStart = ActionWithPayload<
   USER_ACTION_TYPES.SIGN_UP_START,
-  { email: string }
+  { email: string, password: string, displayName: string}
 >;
 
 export type SignUpSuccess = ActionWithPayload<

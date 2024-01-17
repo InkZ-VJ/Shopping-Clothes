@@ -24,18 +24,16 @@ import {
   QueryDocumentSnapshot,
 } from 'firebase/firestore';
 
-import {Category} from '../../store/categories/categories.types';
+import { firebaseConfig } from './firebase.config';
 
-import { FIREBASE_KEY } from './firebase.key';
-
-const firebaseConfig = {
-    apiKey: FIREBASE_KEY.apiKey,
-    authDomain: FIREBASE_KEY.authDomain,
-    projectId: FIREBASE_KEY.projectId,
-    storageBucket: FIREBASE_KEY.storageBucket,
-    messagingSenderId: FIREBASE_KEY.messagingSenderId,
-    appId: FIREBASE_KEY.appId,
-}
+// const firebaseConfig = {
+//   apiKey: process.env.REACT_APP_FIREBASE_KEY_API_KEY,
+//   authDomain: process.env.REACT_APP_FIREBASE_KEY_AUTH_DOMAIN,
+//   projectId: process.env.REACT_APP_FIREBASE_KEY_PROJECT_ID,
+//   storageBucket: process.env.REACT_APP_FIREBASE_KEY_STORAGE_BUCKET,
+//   messagingSenderId: process.env.REACT_APP_FIREBASE_KEY_MESSAGING,
+//   appId: process.env.REACT_APP_FIREBASE_KEY_APP_ID,
+// }
 
 const firebaseApp = initializeApp(firebaseConfig);
 
